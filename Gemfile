@@ -34,7 +34,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 # Sorbet's runtime type checking component
-gem 'sorbet-runtime', '~> 0.5.10737'
+gem 'sorbet-runtime'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -44,7 +44,7 @@ end
 group :development do
   # This repository contains Sorbet, a fast, powerful type checker designed for Ruby. 
   # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
-  gem 'sorbet', '~> 0.5.10737'
+  gem 'sorbet'
   # Tapioca makes it easy to work with Sorbet in your codebase. 
   # It surfaces types and methods from many sources that Sorbet cannot otherwise see – such as gems, 
   # Rails and other DSLs – compiles them into RBI files and makes it easy for you to add gradual typing to your application.
