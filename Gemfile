@@ -33,13 +33,21 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
+# Sorbet's runtime type checking component
+gem 'sorbet-runtime', '~> 0.5.10737'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # This repository contains Sorbet, a fast, powerful type checker designed for Ruby. 
+  # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
+  gem 'sorbet', '~> 0.5.10737'
+  # Tapioca makes it easy to work with Sorbet in your codebase. 
+  # It surfaces types and methods from many sources that Sorbet cannot otherwise see – such as gems, 
+  # Rails and other DSLs – compiles them into RBI files and makes it easy for you to add gradual typing to your application.
+  gem 'tapioca', '~> 0.11.3'
 end
 
