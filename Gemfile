@@ -39,6 +39,8 @@ group :development, :test do
 end
 
 group :development do
+  # Add a comment summarizing the current schema to the top or bottom of each of your...
+  gem 'annotate', '~> 3.2.0'
   # This repository contains Sorbet, a fast, powerful type checker designed for Ruby. 
   # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
   gem 'sorbet'
