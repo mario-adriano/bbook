@@ -1,0 +1,7 @@
+{
+  "clangd.semanticHighlighting": false,
+  // "sorbet.enabled": true,
+  "[ruby]": {
+    "editor.tabSize": 2
+  }
+}
