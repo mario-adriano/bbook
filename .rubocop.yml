@@ -1,0 +1,13 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 3.2.1
+  NewCops: enable
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
