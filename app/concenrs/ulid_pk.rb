@@ -1,15 +1,12 @@
 # rubocop:disable Style/Documentation
 # frozen_string_literal: true
-# typed: true
+# typed: false
 
 require 'ulid'
 
 module UlidPk
   extend ActiveSupport::Concern
   extend T::Sig
-
-  sig { returns(String) }
-  attr_accessor :id
 
   included do
     class_eval do
