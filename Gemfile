@@ -44,6 +44,8 @@ group :development, :test do
 end
 
 group :development do
+  # help to kill N+1 queries and unused eager loading.
+  gem 'bullet', '~> 7.0.7'
   # Add a comment summarizing the current schema to the top or bottom of each of your...
   gem 'annotate', '~> 3.2.0'
   # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
