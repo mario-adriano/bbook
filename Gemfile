@@ -44,10 +44,13 @@ group :development, :test do
 end
 
 group :development do
-  # help to kill N+1 queries and unused eager loading.
-  gem 'bullet', '~> 7.0.7'
   # Add a comment summarizing the current schema to the top or bottom of each of your...
   gem 'annotate', '~> 3.2.0'
+  # help to kill N+1 queries and unused eager loading.
+  gem 'bullet', '~> 7.0.7'
+  # Avoid repeating yourself, use pry-rails instead of copying the initializer to every
+  # rails project. This is a small gem which causes rails console to open pry. It therefore depends on pry.
+  gem 'pry-rails', '~> 0.3.9'
   # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   gem 'rubocop-rails', '~> 2.18.0', require: false
   # Performance optimization analysis for your projects, as an extension to RuboCop.
