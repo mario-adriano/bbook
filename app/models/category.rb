@@ -5,7 +5,7 @@
 #
 # Table name: categories
 #
-#  id         :binary(16)       not null, primary key
+#  id         :binary           not null, primary key
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
