@@ -57,6 +57,8 @@ group :development do
   gem 'annotate', '~> 3.2.0'
   # help to kill N+1 queries and unused eager loading.
   gem 'bullet', '~> 7.0.7'
+  # The listen gem listens to file modifications and notifies you about the changes.
+  gem 'listen', '~> 3.8.0'
   # Avoid repeating yourself, use pry-rails instead of copying the initializer to every
   # rails project. This is a small gem which causes rails console to open pry. It therefore depends on pry.
   gem 'pry-rails', '~> 0.3.9'
@@ -67,6 +69,11 @@ group :development do
   # This repository contains Sorbet, a fast, powerful type checker designed for Ruby.
   # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
   gem 'sorbet'
+  # Spring is a Rails application preloader. It speeds up development by keeping your application running in
+  # the background, so you don't need to boot it every time you run a test, rake task or migration.
+  gem 'spring', '~> 4.1.1'
+  # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem.
+  gem 'spring-watcher-listen', '~> 2.1.0'
   # Tapioca makes it easy to work with Sorbet in your codebase.
   # It surfaces types and methods from many sources that Sorbet cannot otherwise see – such as gems,
   # Rails and other DSLs – compiles them into RBI files and makes it easy for
