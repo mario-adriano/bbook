@@ -29,6 +29,10 @@ gem 'puma', '~> 5.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# lol_dba is a small package of rake tasks that scan your application models and
+# displays a list of columns that probably should be indexed. Also, it can generate .sql migration scripts.
+gem 'lol_dba'
+
 # Pg is the Ruby interface to the PostgreSQL RDBMS. It works with PostgreSQL 9.3 and later.
 gem 'pg', '~> 1.4.6'
 
