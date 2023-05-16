@@ -66,6 +66,10 @@ group :development do
   gem 'rubocop-rails', '~> 2.18.0', require: false
   # Performance optimization analysis for your projects, as an extension to RuboCop.
   gem 'rubocop-performance', '~> 1.16.0', require: false
+  # Gem containing the rubocop.yml config that corresponds to the implementation of the Shopify's style guide for Ruby.
+  gem 'rubocop-shopify', '~> 2.13.0', require: false
+  # Automatic Sorbet code style checking tool.
+  gem 'rubocop-sorbet', '~> 0.7.0', require: false
   # This repository contains Sorbet, a fast, powerful type checker designed for Ruby.
   # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
   gem 'sorbet'
