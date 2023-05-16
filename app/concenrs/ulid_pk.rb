@@ -1,8 +1,7 @@
-# rubocop:disable Style/Documentation
-# frozen_string_literal: true
 # typed: false
+# frozen_string_literal: true
 
-require 'ulid'
+require "ulid"
 
 module UlidPk
   extend ActiveSupport::Concern
