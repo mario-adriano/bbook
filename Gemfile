@@ -50,6 +50,9 @@ group :development, :test do
   gem "debug", platforms: [:mri, :mingw, :x64_mingw]
   # Autoload dotenv in Rails.
   gem "dotenv-rails", "~> 2.8.1"
+  # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default
+  # testing framework, Minitest.
+  gem "rspec-rails", "~> 6.0.2"
 end
 
 group :development do
