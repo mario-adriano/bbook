@@ -50,6 +50,10 @@ group :development, :test do
   gem "debug", platforms: [:mri, :mingw, :x64_mingw]
   # Autoload dotenv in Rails.
   gem "dotenv-rails", "~> 2.8.1"
+  # factory_bot is a fixtures replacement with a straightforward definition syntax, support for multiple build
+  # strategies (saved instances, unsaved instances, attribute hashes, and stubbed objects), and support for multiple
+  # factories for the same class (user, admin_user, and so on), including factory inheritance.
+  gem "factory_bot_rails", "~> 6.2.0"
   # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default
   # testing framework, Minitest.
   gem "rspec-rails", "~> 6.0.2"
