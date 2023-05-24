@@ -14,4 +14,18 @@
 #
 
 class Book < ApplicationRecord
+  extend T::Sig
+
+  before_create :downcase_title
+
+  validates :title, presence: true, length: { maximum: 70 }
+  validates :description, presence: true, length: { maximum: 500 }
+  validates :original_publication_year, numericality: { less_than_or_equal_to: Time.current.year }
+
+  private
+
+  sig { void }
+  def downcase_title
+    title.downcase!
+  end
 end
