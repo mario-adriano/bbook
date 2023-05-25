@@ -35,24 +35,19 @@ RSpec.describe(Book, type: :model) do
 
   describe "validations" do
     before do
-      @book = Book.new(
-        title: "The Hobbit",
-        description: "The Hobbit is set in Middle-earth and follows home-loving
-                      Bilbo Baggins, the titular hobbit",
-        original_publication_year: 1937,
-      )
+      @book = build(:book)
     end
 
     context "when validating title" do
       it "is invalid without a title" do
         @book.title = ""
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:title]).to(include({ error: :blank }))
       end
 
       it "is invalid with a title longer than 70 characters" do
         @book.title = "a" * 71
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:title]).to(include({ count: 70, error: :too_long }))
       end
     end
@@ -60,13 +55,13 @@ RSpec.describe(Book, type: :model) do
     context "when validating description" do
       it "is invalid without a description" do
         @book.description = ""
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:description]).to(include({ error: :blank }))
       end
 
       it "is invalid with a description longer than 500 characters" do
         @book.description = "a" * 501
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:description]).to(include({ count: 500, error: :too_long }))
       end
     end
@@ -74,19 +69,19 @@ RSpec.describe(Book, type: :model) do
     context "when validating original_publication_year" do
       it "is invalid without a publication year" do
         @book.original_publication_year = nil
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:original_publication_year]).to(include({ error: :not_a_number, value: nil }))
       end
 
       it "is invalid with a non-numeric publication year" do
         @book.original_publication_year = "abc"
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:original_publication_year]).to(include({ error: :not_a_number, value: "abc" }))
       end
 
       it "is invalid with a publication year in the future" do
         @book.original_publication_year = Time.current.year + 1
-        expect(@book.valid?).to(be_falsey)
+        expect(@book).to(be_invalid)
         expect(@book.errors.details[:original_publication_year]).to(include({
           count: 2023,
           error: :less_than_or_equal_to,
@@ -97,26 +92,17 @@ RSpec.describe(Book, type: :model) do
 
     context "when all attributes are valid" do
       it "is valid with valid attributes" do
-        expect(@book.valid?).to(be_truthy)
+        expect(@book).to(be_valid)
       end
     end
   end
 
   describe "before_create" do
-    before do
-      @book = Book.new(
-        title: "The Hobbit",
-        description: "The Hobbit is set in Middle-earth and follows home-loving
-                      Bilbo Baggins, the titular hobbit",
-        original_publication_year: 1937,
-      )
-    end
-
     context "when processing title" do
+      subject { create(:book, title: "THE HOBBIT").title }
+
       it "converts title to lowercase before saving" do
-        @book.title = "THE HOBBIT"
-        @book.save!
-        expect(@book.reload.title).to(eq("the hobbit"))
+        is_expected.to(eq("the hobbit"))
       end
     end
   end
