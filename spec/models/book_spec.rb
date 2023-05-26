@@ -31,6 +31,14 @@ RSpec.describe(Book, type: :model) do
     it "has a original_publication_year column of type integer" do
       expect(Book.column_for_attribute(:original_publication_year).type).to(eq(:integer))
     end
+
+    it "has a created_at column of type datetime" do
+      expect(Category.column_for_attribute(:created_at).type).to(eq(:datetime))
+    end
+
+    it "has a updated_at column of type datetime" do
+      expect(Category.column_for_attribute(:updated_at).type).to(eq(:datetime))
+    end
   end
 
   describe "validations" do
@@ -97,13 +105,7 @@ RSpec.describe(Book, type: :model) do
     end
   end
 
-  describe "before_create" do
-    context "when processing title" do
-      subject { create(:book, title: "THE HOBBIT").title }
-
-      it "converts title to lowercase before saving" do
-        is_expected.to(eq("the hobbit"))
-      end
-    end
+  it "normalize title value" do
+    expect(described_class.new(title: " ThE hoBbit ").title).to(eq("the hobbit"))
   end
 end

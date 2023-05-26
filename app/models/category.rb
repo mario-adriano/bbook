@@ -17,15 +17,11 @@
 class Category < ApplicationRecord
   extend T::Sig
 
-  before_save :downcase_name
-
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 30 }
   validates :name, uniqueness: { case_sensitive: false }
 
-  private
-
-  sig { void }
-  def downcase_name
-    name.downcase!
+  sig { params(value: String).void }
+  def name=(value)
+    write_attribute(:name, value.downcase.strip)
   end
 end

@@ -19,39 +19,57 @@ require "factory_bot_rails"
 
 describe Category, type: :model do
   describe "database columns" do
+    it "has a id column of type binary" do
+      expect(Category.column_for_attribute(:id).type).to(eq(:binary))
+    end
+
     it "has a name column of type string" do
       expect(Category.column_for_attribute(:name).type).to(eq(:string))
     end
+
     it "has a created_at column of type datetime" do
       expect(Category.column_for_attribute(:created_at).type).to(eq(:datetime))
     end
+
     it "has a updated_at column of type datetime" do
       expect(Category.column_for_attribute(:updated_at).type).to(eq(:datetime))
     end
   end
 
   describe "validations" do
-    it "requires a name" do
-      category = Category.new(name: "")
-      expect(category.valid?).to(be_falsey)
-      expect(category.errors.details[:name]).to(include({ error: :blank }))
+    before do
+      @category = build(:category)
     end
 
-    it "is valid with valid attributes" do
-      category = Category.new(name: "Fiction")
-      expect(category.valid?).to(be_truthy)
+    context "when validating name" do
+      it "is invalid without a name" do
+        @category.name = ""
+        expect(@category).to(be_invalid)
+        expect(@category.errors.details[:name]).to(include({ error: :blank }))
+      end
+
+      it "is invalid with same name" do
+        @category.save!
+        new_category = build(:category, name: "adventure")
+        expect(new_category).to(be_invalid)
+        expect(new_category.errors.details[:name]).to(include({ error: :taken, value: "adventure" }))
+      end
+
+      it "is invalid with a description longer than 30 characters" do
+        @category.name = "a" * 31
+        expect(@category).to(be_invalid)
+        expect(@category.errors.details[:name]).to(include({ count: 30, error: :too_long }))
+      end
     end
 
-    it "validates uniqueness of name" do
-      Category.create!(name: "high fantasy")
-      category = Category.new(name: "high fantasy")
-      expect(category.valid?).to(eq(false))
-      expect(category.errors.details[:name]).to(include({ error: :taken, value: "high fantasy" }))
+    context "when all attributes are valid" do
+      it "is valid with valid attributes" do
+        expect(@category).to(be_valid)
+      end
     end
+  end
 
-    it "validate name in lower case" do
-      category = Category.create!(name: "HIGH FANTASY")
-      expect(category.reload.name).to(eq("high fantasy"))
-    end
+  it "normalize name value" do
+    expect(described_class.new(name: " AdveNTurE ").name).to(eq("adventure"))
   end
 end
