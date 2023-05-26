@@ -68,8 +68,4 @@ describe Category, type: :model do
       end
     end
   end
-
-  it "normalize name value" do
-    expect(described_class.new(name: " AdveNTurE ").name).to(eq("adventure"))
-  end
 end

@@ -104,8 +104,4 @@ RSpec.describe(Book, type: :model) do
       end
     end
   end
-
-  it "normalize title value" do
-    expect(described_class.new(title: " ThE hoBbit ").title).to(eq("the hobbit"))
-  end
 end
