@@ -19,53 +19,29 @@ require "factory_bot_rails"
 
 describe Category, type: :model do
   describe "database columns" do
-    it "has a id column of type binary" do
-      expect(Category.column_for_attribute(:id).type).to(eq(:binary))
-    end
+    it { should have_db_column(:id).of_type(:binary) }
+    it { should have_db_column(:name).of_type(:string) }
+    it { should have_db_column(:created_at).of_type(:datetime) }
+    it { should have_db_column(:updated_at).of_type(:datetime) }
+  end
 
-    it "has a name column of type string" do
-      expect(Category.column_for_attribute(:name).type).to(eq(:string))
-    end
+  describe "when all attributes are valid" do
+    subject { build(:category) }
 
-    it "has a created_at column of type datetime" do
-      expect(Category.column_for_attribute(:created_at).type).to(eq(:datetime))
-    end
+    it { is_expected.to(be_valid) }
+  end
 
-    it "has a updated_at column of type datetime" do
-      expect(Category.column_for_attribute(:updated_at).type).to(eq(:datetime))
-    end
+  describe "attributes consistency after persistence" do
+    subject(:category) { create(:category) }
+
+    it { expect(category.name).to(eq(FactoryBot.attributes_for(:category)[:name])) }
   end
 
   describe "validations" do
-    before do
-      @category = build(:category)
-    end
+    subject { build(:category) }
 
-    context "when validating name" do
-      it "is invalid without a name" do
-        @category.name = ""
-        expect(@category).to(be_invalid)
-        expect(@category.errors.details[:name]).to(include({ error: :blank }))
-      end
-
-      it "is invalid with same name" do
-        @category.save!
-        new_category = build(:category, name: "adventure")
-        expect(new_category).to(be_invalid)
-        expect(new_category.errors.details[:name]).to(include({ error: :taken, value: "adventure" }))
-      end
-
-      it "is invalid with a description longer than 30 characters" do
-        @category.name = "a" * 31
-        expect(@category).to(be_invalid)
-        expect(@category.errors.details[:name]).to(include({ count: 30, error: :too_long }))
-      end
-    end
-
-    context "when all attributes are valid" do
-      it "is valid with valid attributes" do
-        expect(@category).to(be_valid)
-      end
-    end
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_length_of(:name).is_at_most(30) }
   end
 end

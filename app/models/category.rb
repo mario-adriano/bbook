@@ -18,5 +18,5 @@ class Category < ApplicationRecord
   extend T::Sig
 
   validates :name, presence: true, length: { maximum: 30 }
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: true
 end

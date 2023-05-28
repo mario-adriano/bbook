@@ -16,92 +16,35 @@ require "rails_helper"
 
 RSpec.describe(Book, type: :model) do
   describe "database column" do
-    it "has a id column of type binary" do
-      expect(Book.column_for_attribute(:id).type).to(eq(:binary))
-    end
+    it { should have_db_column(:id).of_type(:binary) }
+    it { should have_db_column(:title).of_type(:string) }
+    it { should have_db_column(:description).of_type(:text) }
+    it { should have_db_column(:original_publication_year).of_type(:integer) }
+    it { should have_db_column(:created_at).of_type(:datetime) }
+    it { should have_db_column(:updated_at).of_type(:datetime) }
+  end
 
-    it "has a description column of type text" do
-      expect(Book.column_for_attribute(:description).type).to(eq(:text))
-    end
+  describe "when all attributes are valid" do
+    subject { build(:book) }
 
-    it "has a title column of type string" do
-      expect(Book.column_for_attribute(:title).type).to(eq(:string))
-    end
+    it { is_expected.to(be_valid) }
+  end
 
-    it "has a original_publication_year column of type integer" do
-      expect(Book.column_for_attribute(:original_publication_year).type).to(eq(:integer))
-    end
+  describe "attributes consistency after persistence" do
+    subject(:book) { create(:book) }
 
-    it "has a created_at column of type datetime" do
-      expect(Category.column_for_attribute(:created_at).type).to(eq(:datetime))
-    end
-
-    it "has a updated_at column of type datetime" do
-      expect(Category.column_for_attribute(:updated_at).type).to(eq(:datetime))
-    end
+    it { expect(book.title).to(eq(FactoryBot.attributes_for(:book)[:title])) }
+    it { expect(book.description).to(eq(FactoryBot.attributes_for(:book)[:description])) }
+    it { expect(book.original_publication_year).to(eq(FactoryBot.attributes_for(:book)[:original_publication_year])) }
   end
 
   describe "validations" do
-    # before do
-    #   @book = build(:book)
-    # end
-
-    subject { book }
-
-    let(:book) { build(:book) }
-
-    context "when title is invalid" do
-      before { book.title = title }
-
-      context "when title is empty" do
-        let(:title) { "" }
-
-        it { is_expected.to(be_invalid) }
-        it { is_expected.to(validate_presence_of(:title)) }
-      end
-
-      context "when title is too long" do
-        let(:title) { "a" * 71 }
-
-        it { is_expected.to(be_invalid) }
-        it { is_expected.to(validate_length_of(:title).is_at_most(70)) }
-      end
-    end
-
-    context "when description is invalid" do
-      before { book.description = description }
-
-      context "when description is empty" do
-        let(:description) { "" }
-
-        it { is_expected.to(be_invalid) }
-        it { is_expected.to(validate_presence_of(:description)) }
-      end
-
-      context "when description is too long" do
-        let(:description) { "a" * 501 }
-
-        it { is_expected.to(be_invalid) }
-        it { is_expected.to(validate_length_of(:description).is_at_most(500)) }
-      end
-    end
-
-    context "when original_publication_year is invalid" do
-      before { book.original_publication_year = original_publication_year }
-
-      context "when original_publication_year is empty" do
-        let(:original_publication_year) { "" }
-
-        it { is_expected.to(be_invalid) }
-        it {
-          is_expected.to(validate_numericality_of(:original_publication_year)
-          .is_less_than_or_equal_to(Time.current.year))
-        }
-      end
-    end
-
-    context "when all attributes are valid" do
-      it { is_expected.to(be_valid) }
-    end
+    it { should validate_presence_of(:title) }
+    it { should validate_length_of(:title).is_at_most(70) }
+    it { should validate_presence_of(:description) }
+    it { should validate_length_of(:description).is_at_most(500) }
+    it {
+      should validate_numericality_of(:original_publication_year).is_less_than_or_equal_to(Time.current.year)
+    }
   end
 end
