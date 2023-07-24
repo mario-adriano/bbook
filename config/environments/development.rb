@@ -63,4 +63,9 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = false
   end
+
+  # Attach comments to your ActiveRecord queries. By default, 
+  # it adds the application, controller, 
+  # and action names as a comment at the end of each query.
+  config.active_record.query_log_tags_enabled = true
 end
