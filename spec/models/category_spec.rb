@@ -19,10 +19,10 @@ require "factory_bot_rails"
 
 describe Category, type: :model do
   describe "database columns" do
-    it { should have_db_column(:id).of_type(:binary) }
-    it { should have_db_column(:name).of_type(:string) }
-    it { should have_db_column(:created_at).of_type(:datetime) }
-    it { should have_db_column(:updated_at).of_type(:datetime) }
+    it { is_expected.to(have_db_column(:id).of_type(:binary)) }
+    it { is_expected.to(have_db_column(:name).of_type(:string)) }
+    it { is_expected.to(have_db_column(:created_at).of_type(:datetime)) }
+    it { is_expected.to(have_db_column(:updated_at).of_type(:datetime)) }
   end
 
   describe "when all attributes are valid" do
@@ -40,8 +40,8 @@ describe Category, type: :model do
   describe "validations" do
     subject { build(:category) }
 
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_length_of(:name).is_at_most(30) }
+    it { is_expected.to(validate_presence_of(:name)) }
+    it { is_expected.to(validate_uniqueness_of(:name)) }
+    it { is_expected.to(validate_length_of(:name).is_at_most(30)) }
   end
 end

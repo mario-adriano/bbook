@@ -16,12 +16,12 @@ require "rails_helper"
 
 RSpec.describe(Book, type: :model) do
   describe "database column" do
-    it { should have_db_column(:id).of_type(:binary) }
-    it { should have_db_column(:title).of_type(:string) }
-    it { should have_db_column(:description).of_type(:text) }
-    it { should have_db_column(:original_publication_year).of_type(:integer) }
-    it { should have_db_column(:created_at).of_type(:datetime) }
-    it { should have_db_column(:updated_at).of_type(:datetime) }
+    it { is_expected.to(have_db_column(:id).of_type(:binary)) }
+    it { is_expected.to(have_db_column(:title).of_type(:string)) }
+    it { is_expected.to(have_db_column(:description).of_type(:text)) }
+    it { is_expected.to(have_db_column(:original_publication_year).of_type(:integer)) }
+    it { is_expected.to(have_db_column(:created_at).of_type(:datetime)) }
+    it { is_expected.to(have_db_column(:updated_at).of_type(:datetime)) }
   end
 
   describe "when all attributes are valid" do
@@ -39,12 +39,12 @@ RSpec.describe(Book, type: :model) do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:title) }
-    it { should validate_length_of(:title).is_at_most(70) }
-    it { should validate_presence_of(:description) }
-    it { should validate_length_of(:description).is_at_most(500) }
+    it { is_expected.to(validate_presence_of(:title)) }
+    it { is_expected.to(validate_length_of(:title).is_at_most(70)) }
+    it { is_expected.to(validate_presence_of(:description)) }
+    it { is_expected.to(validate_length_of(:description).is_at_most(500)) }
     it {
-      should validate_numericality_of(:original_publication_year).is_less_than_or_equal_to(Time.current.year)
+      is_expected.to(validate_numericality_of(:original_publication_year).is_less_than_or_equal_to(Time.current.year))
     }
   end
 end
