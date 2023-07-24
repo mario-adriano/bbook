@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module Api
@@ -6,31 +6,34 @@ module Api
     class CategoriesController < Api::V1::ApplicationController
       before_action :set_category, only: [:show, :update, :destroy]
 
-      rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
       # GET /categories
+      sig { void }
       def index
-        @categories = Category.all
-        render(json: @categories)
+        categories = T.let(Category.all, ActiveRecord::Relation)
+        render(json: categories)
       end
 
       # GET /categories/1
+      sig { void }
       def show
-        render(json: @category)
+        category = T.let(@category, Category)
+        render(json: category)
       end
 
       # POST /categories
+      sig { void }
       def create
-        @category = Category.new(category_params)
+        category = T.let(Category.new(category_params), Category)
 
-        if @category.save
-          render(json: @category, status: :created)
+        if category.save
+          render(json: category, status: :created)
         else
-          render(json: @category.errors, status: :unprocessable_entity)
+          render(json: category.errors, status: :unprocessable_entity)
         end
       end
 
       # PATCH/PUT /categories/1
+      sig { void }
       def update
         if @category.update(category_params)
           render(json: @category)
@@ -40,6 +43,7 @@ module Api
       end
 
       # DELETE /categories/1
+      sig { void }
       def destroy
         @category.destroy
       end
@@ -51,13 +55,10 @@ module Api
         params.require(:category).permit(:name)
       end
 
-      sig { returns(Category) }
+      sig { void }
       def set_category
-        @category = Category.find(params[:id])
-      end
-
-      sig { returns(T.untyped) }
-      def record_not_found
+        @category = T.let(Category.find(params[:id]), T.untyped)
+      rescue ActiveRecord::RecordNotFound
         render(json: { error: "Record not found" }, status: :not_found)
       end
     end
