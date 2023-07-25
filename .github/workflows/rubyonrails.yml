@@ -26,7 +26,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: ${{ secrets.POSTGRES_HOST_AUTH_METHOD }}
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DATABASE }}"
+      DATABASE_URL: "postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DATABASE }}_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -34,6 +34,10 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
+      - name: Check PostgreSQL service
+      run: |
+        sudo systemctl status postgresql
+        psql -c 'SELECT version();'
       - name: Run create
         run: bin/rails db:create
       - name: Run migrate
