@@ -37,10 +37,10 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
-      - name: Check PostgreSQL service
-        run: |
-          sudo systemctl status postgresql
-          psql -c 'SELECT version();'
+      # - name: Check PostgreSQL service
+      #   run: |
+      #     sudo systemctl status postgresql
+      #     psql -c 'SELECT version();'
       - name: Load database schema
         run: './bin/rails db:create db:schema:load db:seed'
       - name: Run RSpec tests
