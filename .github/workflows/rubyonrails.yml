@@ -42,7 +42,7 @@ jobs:
       - name: Run RSpec tests
         run: bin/bundle exec rspec spec
       - name: Check types with Sorbet
-        run: srb tc
+        run: bundle exec srb tc
   lint:
     runs-on: ubuntu-latest
     steps:
