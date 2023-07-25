@@ -55,6 +55,17 @@ group :development, :test do
   # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default
   # testing framework, Minitest.
   gem "rspec-rails", "~> 6.0.2"
+  # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
+  gem "rubocop-rails", "~> 2.18.0", require: false
+  # Performance optimization analysis for your projects, as an extension to RuboCop.
+  gem "rubocop-performance", "~> 1.16.0", require: false
+  # Gem containing the rubocop.yml config that corresponds to the implementation of the Shopify's style guide for Ruby.
+  gem "rubocop-shopify", "~> 2.13.0", require: false
+  # Automatic Sorbet code style checking tool.
+  gem "rubocop-sorbet", "~> 0.7.0", require: false
+  # This repository contains Sorbet, a fast, powerful type checker designed for Ruby.
+  # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
+  gem "sorbet"
 end
 
 group :development do
@@ -67,17 +78,6 @@ group :development do
   # Avoid repeating yourself, use pry-rails instead of copying the initializer to every
   # rails project. This is a small gem which causes rails console to open pry. It therefore depends on pry.
   gem "pry-rails", "~> 0.3.9"
-  # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
-  gem "rubocop-rails", "~> 2.18.0", require: false
-  # Performance optimization analysis for your projects, as an extension to RuboCop.
-  gem "rubocop-performance", "~> 1.16.0", require: false
-  # Gem containing the rubocop.yml config that corresponds to the implementation of the Shopify's style guide for Ruby.
-  gem "rubocop-shopify", "~> 2.13.0", require: false
-  # Automatic Sorbet code style checking tool.
-  gem "rubocop-sorbet", "~> 0.7.0", require: false
-  # This repository contains Sorbet, a fast, powerful type checker designed for Ruby.
-  # It aims to be easy to add to existing codebases with gradual types, and fast to respond with errors and suggestions.
-  gem "sorbet"
   # Spring is a Rails application preloader. It speeds up development by keeping your application running in
   # the background, so you don't need to boot it every time you run a test, rake task or migration.
   gem "spring", "~> 4.1.1"
