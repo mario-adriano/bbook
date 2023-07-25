@@ -46,8 +46,6 @@ gem "sorbet-runtime"
 gem "ulid"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: [:mri, :mingw, :x64_mingw]
   # Autoload dotenv in Rails.
   gem "dotenv-rails", "~> 2.8.1"
   # factory_bot is a fixtures replacement with a straightforward definition syntax, support for multiple build
