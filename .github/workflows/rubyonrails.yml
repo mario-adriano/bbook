@@ -35,9 +35,9 @@ jobs:
         with:
           bundler-cache: true
       - name: Check PostgreSQL service
-      run: |
-        sudo systemctl status postgresql
-        psql -c 'SELECT version();'
+        run: |
+          sudo systemctl status postgresql
+          psql -c 'SELECT version();'
       - name: Run create
         run: bin/rails db:create
       - name: Run migrate
