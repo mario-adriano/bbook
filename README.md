@@ -1,6 +1,6 @@
-[![Ruby Testing]((https://github.com/mario-adriano/bbook/actions/workflows/test-ruby.yml/badge.svg))](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/test-ruby.yml)
-[![Ruby Linting]((https://github.com/mario-adriano/bbook/actions/workflows/lint-ruby.yml/badge.svg))](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/lint-ruby.yml)
-[![Sorbet]((https://github.com/mario-adriano/bbook/actions/workflows/sorbet-ruby.yml/badge.svg))](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/sorbet-ruby.yml)
+[![Ruby Testing](https://github.com/mario-adriano/bbook/actions/workflows/test-ruby.yml/badge.svg)](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/test-ruby.yml)
+[![Ruby Linting](https://github.com/mario-adriano/bbook/actions/workflows/lint-ruby.yml/badge.svg)](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/lint-ruby.yml)
+[![Sorbet](https://github.com/mario-adriano/bbook/actions/workflows/sorbet-ruby.yml/badge.svg)](https://github.com/mario-adriano/bbook/blob/main/.github/workflows/sorbet-ruby.yml)
 
 # Bbook
 
