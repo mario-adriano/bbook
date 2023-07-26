@@ -32,6 +32,9 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
+          ruby-version: 3.2.1
+          with-jemalloc: true
+          with-yjit: true
       - name: Load database schema
         run: './bin/rails db:create db:schema:load db:seed'
       - name: Run RSpec tests
